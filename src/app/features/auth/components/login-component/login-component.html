@@ -1,0 +1,68 @@
+<div id="container">
+
+  <!-- ==========================================================
+        Formulaire de login
+        En Angular : <form [formGroup]="loginFormGroup" (submit)="login()">
+        ========================================================== -->
+  <form class="login-form" [formGroup]="loginFormGroup" (submit)="login()" autocomplete="on">
+
+    <div class="brand" aria-hidden="true">
+      <!-- Illustration inline : petites cartes empilées (logo) -->
+      <svg viewBox="0 0 48 48" role="img" aria-label="Collection Manager">
+        <rect x="4" y="4" width="40" height="40" rx="10" fill="#e3ecfb"/>
+        <rect x="12" y="12" width="24" height="7" rx="3" fill="#005cbb"/>
+        <rect x="12" y="22" width="24" height="7" rx="3" fill="#7ba1e0"/>
+        <rect x="12" y="32" width="15" height="5" rx="2.5" fill="#9db9e6"/>
+      </svg>
+    </div>
+
+    <h1>Login</h1>
+    <p class="subtitle">Gestionnaire de collection</p>
+
+    <div class="form-field">
+      <div class="control">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          formControlName="email"
+          type="text"
+          autocomplete="email"
+          required
+        >
+      </div>
+    </div>
+
+    <div class="form-field">
+      <div class="control">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          formControlName="password"
+          type="password"
+          autocomplete="current-password"
+          required
+        >
+      </div>
+    </div>
+
+    <button [disabled]="loginFormGroup.invalid" class="btn btn-filled login-button" type="submit">Se connecter</button>
+
+    <!--
+      Zone dynamique Angular :
+      @if (invalidCredentials()) {
+        <mat-error>Invalid credentials</mat-error>
+      }
+      Le bloc ci-dessous illustre le rendu de ce message (masqué par défaut).
+    -->
+    <p class="error" hidden>Invalid credentials</p>
+
+    <p class="demo-hint">
+      Identifiants de démonstration : <strong>admin</strong> / <strong>admin1234</strong>
+    </p>
+
+    <p class="switch-auth">
+      Pas encore de compte ? <a routerLink="register">Créer un compte</a>
+    </p>
+  </form>
+
+</div>
