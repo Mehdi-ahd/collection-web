@@ -3,7 +3,7 @@ import { inject, Service, signal } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { User } from '../../shared/interfaces/User';
-import { ApiResponse, AuthData } from '../../shared/interfaces/ApiResponse';
+import { ApiResponse, AuthData, RegisterData } from '../../shared/interfaces/ApiResponse';
 
 interface LoginCredentials {
   email: string,
@@ -29,6 +29,10 @@ export class AuthService {
         this.setSession(response.data);
       })
     );
+  }
+
+  register(user: RegisterData): Observable<ApiResponse<{ user: User }>>{
+    return this.http.post<ApiResponse<{ user: User }>>(`${this.apiUrl}/register`, user);
   }
 
   setUser(user: User) {
