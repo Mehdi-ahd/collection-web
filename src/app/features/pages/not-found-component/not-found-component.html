@@ -1,0 +1,49 @@
+<div id="container">
+
+  <div class="not-found-card">
+
+    <!-- Illustration inline : carte de collection manquante -->
+    <div class="illustration" aria-hidden="true">
+      <svg viewBox="0 0 220 160" role="img" aria-label="Page introuvable">
+        <!-- Halo -->
+        <ellipse cx="110" cy="142" rx="78" ry="10" fill="#dfe7f5" opacity="0.7"/>
+
+        <!-- Carte arrière (inclinée) -->
+        <g transform="rotate(-8 84 82)">
+          <rect x="40" y="34" width="88" height="104" rx="10" fill="#dce7f9" stroke="#b9cdf0" stroke-width="2"/>
+          <rect x="52" y="48" width="64" height="44" rx="6" fill="#c3d5ef"/>
+          <rect x="52" y="102" width="44" height="8" rx="4" fill="#b9cdf0"/>
+          <rect x="52" y="116" width="30" height="6" rx="3" fill="#cdd9ec"/>
+        </g>
+
+        <!-- Carte avant -->
+        <g transform="rotate(6 128 80)">
+          <rect x="86" y="26" width="90" height="108" rx="10" fill="#f0f6ff" stroke="#8ca3c7" stroke-width="2"/>
+          <rect x="98" y="40" width="66" height="46" rx="6" fill="#e3ecfb"/>
+          <circle cx="131" cy="63" r="10" fill="none" stroke="#8ca3c7" stroke-width="3"/>
+          <path d="M102 82 l16 -18 l11 12 l8 -8 l17 14 z" fill="#c3d0e2"/>
+          <rect x="98" y="98" width="48" height="8" rx="4" fill="#c9d7ea"/>
+          <rect x="98" y="112" width="32" height="6" rx="3" fill="#dbe4f1"/>
+        </g>
+
+        <!-- Point d'interrogation -->
+        <circle cx="176" cy="34" r="20" fill="#005cbb"/>
+        <text x="176" y="42" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">?</text>
+      </svg>
+    </div>
+
+    <p class="code">404</p>
+    <h1>Page introuvable</h1>
+    <p>
+      La page que vous cherchez n'existe pas ou a été déplacée.
+      Revenez à votre collection pour continuer.
+    </p>
+
+    <div class="actions">
+      <a class="btn btn-filled" href="collection-detail.html">Retour à la collection</a>
+      <a class="btn btn-text" routerLink="login" >Se connecter</a>
+    </div>
+
+  </div>
+
+</div>

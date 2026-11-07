@@ -1,0 +1,155 @@
+/* ============================================================
+    THÈME
+    ============================================================ */
+:root {
+  --primary: #005cbb;
+  --primary-dark: #004a99;
+  --on-surface: #1b1b1f;
+  --on-surface-variant: #44474e;
+  --name: #1e2a3a;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Roboto, "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  color: var(--on-surface);
+  background: linear-gradient(
+    135deg,
+    #f5e6ff 0%,
+    #e6f0ff 50%,
+    #f5e6ff 100%
+  );
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+    CONTENEUR CENTRÉ
+    ============================================================ */
+#container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 1.5rem;
+}
+
+.not-found-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 520px;
+  max-width: 100%;
+  padding: 2.5rem 2rem 2rem;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(30, 42, 58, 0.14);
+  text-align: center;
+}
+
+/* ============================================================
+    ILLUSTRATION
+    ============================================================ */
+.illustration {
+  width: 220px;
+  max-width: 70%;
+  margin-bottom: 0.5rem;
+}
+
+.illustration svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ============================================================
+    TEXTES
+    ============================================================ */
+.not-found-card .code {
+  margin: 0;
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--primary);
+}
+
+.not-found-card h1 {
+  margin: 0.75rem 0 0.5rem;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--name);
+}
+
+.not-found-card p {
+  margin: 0;
+  max-width: 38ch;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--on-surface-variant);
+}
+
+/* ============================================================
+    BOUTONS
+    ============================================================ */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.btn-filled {
+  background-color: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-filled:hover {
+  background-color: var(--primary-dark);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.btn-filled:active { transform: translateY(1px); }
+
+.btn-text {
+  background-color: transparent;
+  color: var(--primary);
+}
+
+.btn-text:hover { background-color: rgba(0, 92, 187, 0.08); }
+
+/* ============================================================
+    RESPONSIVE
+    ============================================================ */
+@media (max-width: 480px) {
+  .not-found-card { padding: 2rem 1.25rem 1.5rem; }
+  .not-found-card .code { font-size: 2.75rem; }
+}
