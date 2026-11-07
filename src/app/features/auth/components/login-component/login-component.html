@@ -1,10 +1,6 @@
 <div id="container">
 
-  <!-- ==========================================================
-        Formulaire de login
-        En Angular : <form [formGroup]="loginFormGroup" (submit)="login()">
-        ========================================================== -->
-  <form class="login-form" [formGroup]="loginFormGroup" (submit)="login()" autocomplete="on">
+  <form class="login-form" [formGroup]="loginFormGroup" (ngSubmit)="login()" autocomplete="on">
 
     <div class="brand" aria-hidden="true">
       <!-- Illustration inline : petites cartes empilées (logo) -->
@@ -25,7 +21,7 @@
         <input
           id="email"
           formControlName="email"
-          type="text"
+          type="email"
           autocomplete="email"
           required
         >
@@ -45,20 +41,11 @@
       </div>
     </div>
 
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
+
     <button [disabled]="loginFormGroup.invalid" class="btn btn-filled login-button" type="submit">Se connecter</button>
-
-    <!--
-      Zone dynamique Angular :
-      @if (invalidCredentials()) {
-        <mat-error>Invalid credentials</mat-error>
-      }
-      Le bloc ci-dessous illustre le rendu de ce message (masqué par défaut).
-    -->
-    <p class="error" hidden>Invalid credentials</p>
-
-    <p class="demo-hint">
-      Identifiants de démonstration : <strong>admin</strong> / <strong>admin1234</strong>
-    </p>
 
     <p class="switch-auth">
       Pas encore de compte ? <a routerLink="register">Créer un compte</a>
