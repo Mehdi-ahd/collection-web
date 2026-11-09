@@ -1,0 +1,473 @@
+/* ============================================================
+    THÈME (proche du thème Azure d'Angular Material)
+    ============================================================ */
+:root {
+  --primary: #005cbb;
+  --primary-dark: #004a99;
+  --on-surface: #1b1b1f;
+  --on-surface-variant: #44474e;
+  --field-bg: #e0e2ec;
+  --field-bg-focus: #e8eaf6;
+  --field-border: #74777f;
+  --danger: #d32f2f;
+  --card-bg: #f0f6ff;
+  --card-border: #8ca3c7;
+  --chip: #4a6cf7;
+  --price: #1e8a3a;
+  --name: #1e2a3a;
+  --description: #334155;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Roboto, "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  color: var(--on-surface);
+  background: linear-gradient(
+    135deg,
+    #f5e6ff 0%,
+    #e6f0ff 50%,
+    #f5e6ff 100%
+  );
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+    SHELL : sidebar + contenu
+    ============================================================ */
+#page-container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+  min-width: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 1.5rem 1rem 2rem;
+}
+
+/* ============================================================
+    COMPOSANT MainMenu (sidebar)
+    ============================================================ */
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 282px;
+  width: 282px;
+  height: 100vh;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+}
+
+.main-menu .user {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--name);
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  border: 2px solid #80868f;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.55);
+  font-size: 0.95rem;
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+
+.main-menu ul {
+  flex-grow: 1;
+  width: 250px;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.main-menu li {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #d3d6db;
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.main-menu li.selected {
+  border-color: cadetblue;
+  background-color: #9999ff25;
+}
+
+.dot {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background-color: crimson;
+}
+
+.collection {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.collection .name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--name);
+}
+
+.collection .items-count {
+  font-size: 0.75rem;
+  color: #5f6368;
+}
+
+.main-menu footer { padding-top: 1rem; }
+
+.main-menu footer .btn { width: 100%; }
+
+/* ============================================================
+    BOUTONS
+    ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.btn-filled {
+  background-color: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-filled:hover {
+  background-color: var(--primary-dark);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.btn-filled:active { transform: translateY(1px); }
+
+.btn-danger {
+  background-color: var(--danger);
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-danger:hover {
+  background-color: #b71c1c;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.btn-danger:active { transform: translateY(1px); }
+
+.btn-text {
+  background-color: transparent;
+  color: var(--primary);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.btn-text:hover { background-color: rgba(0, 92, 187, 0.08); }
+
+/* ============================================================
+    MISE EN PAGE : aperçu + formulaire
+    ============================================================ */
+.item-detail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2rem;
+  padding-top: 0.5rem;
+}
+
+.preview {
+  flex: 0 0 auto;
+  width: 16rem;
+  max-width: 100%;
+  margin-top: 10px;
+}
+
+/* ============================================================
+    COMPOSANT CollectionItemCard (aperçu)
+    ============================================================ */
+.collection-item-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+}
+
+.rarity-chip {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: var(--chip);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.item-image {
+  margin: 0.75rem 0 0;
+  text-align: center;
+}
+
+.item-image svg {
+  display: inline-block;
+  width: auto;
+  height: 10rem;
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.item-header { margin-top: 0.75rem; }
+
+.item-name {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--name);
+}
+
+.item-description {
+  margin: 0.75rem 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--description);
+}
+
+.item-price {
+  margin: auto 0 0;
+  padding-top: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--price);
+}
+
+/* Textes de substitution de l'aperçu vide */
+.is-placeholder {
+  color: #98a2b3;
+  font-weight: 500;
+}
+
+/* ============================================================
+    FORMULAIRE DE CRÉATION
+    ============================================================ */
+.item-form {
+  flex: 0 1 400px;
+  width: 400px;
+  max-width: 100%;
+  margin-top: 10px;
+  padding: 1rem;
+  background-color: #ffffff;
+  border: 1px solid #d6d6d6;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* --- Champs "filled" (équivalent mat-form-field appearance="fill") --- */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  padding: 0.45rem 0.85rem 0.55rem;
+  background-color: var(--field-bg);
+  border-bottom: 1px solid var(--field-border);
+  border-radius: 4px 4px 0 0;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.control:focus-within {
+  background-color: var(--field-bg-focus);
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: calc(0.55rem - 1px);
+}
+
+.control label {
+  font-size: 0.75rem;
+  line-height: 1.2;
+  color: var(--on-surface-variant);
+  cursor: text;
+}
+
+.control input,
+.control textarea,
+.control select {
+  width: 100%;
+  padding: 0.15rem 0 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--on-surface);
+}
+
+.control input::placeholder,
+.control textarea::placeholder {
+  color: #8b95a5;
+  opacity: 1;
+}
+
+.control textarea {
+  min-height: 5.5rem;
+  line-height: 1.45;
+  resize: vertical;
+}
+
+.control select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 1.75rem;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5' fill='none' stroke='%2344474e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.25rem center;
+  background-size: 18px 18px;
+}
+
+/* Masquer les flèches natives du champ number */
+.control input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.control input[type="number"]::-webkit-outer-spin-button,
+.control input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* --- Bouton d'upload (label associé à un input file) --- */
+.upload-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 0;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  background-color: #f7f2fa;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.upload-button:hover {
+  background-color: #ece6f0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Message d'erreur (zone dynamique Angular) --- */
+.error {
+  margin: -0.25rem 0 0.5rem;
+  font-size: 0.75rem;
+  color: var(--danger);
+}
+
+/* --- Barre d'actions --- */
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.action-buttons .left,
+.action-buttons .right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.action-buttons .right { justify-content: flex-end; }
+
+/* ============================================================
+    RESPONSIVE
+    ============================================================ */
+@media (max-width: 820px) {
+  #page-container { flex-direction: column; }
+
+  .main-menu {
+    position: static;
+    width: 100%;
+    height: auto;
+    flex-basis: auto;
+  }
+
+  .main-menu ul {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .main-menu li { width: 100%; }
+
+  main {
+    height: auto;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 640px) {
+  .item-detail { gap: 1.25rem; }
+  .preview { width: 100%; max-width: 18rem; }
+  .item-form { width: 100%; }
+  .action-buttons { flex-wrap: wrap; }
+  .action-buttons .left,
+  .action-buttons .right { flex: 1 1 auto; }
+}
