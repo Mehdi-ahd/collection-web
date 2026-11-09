@@ -1,0 +1,197 @@
+/* ============================================================
+    FORMULAIRE D'ÉDITION
+    ============================================================ */
+.item-form {
+  flex: 0 1 400px;
+  width: 400px;
+  max-width: 100%;
+  margin-top: 10px;
+  padding: 1rem;
+  background-color: #ffffff;
+  border: 1px solid #d6d6d6;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* --- Champs "filled" (équivalent mat-form-field appearance="fill") --- */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  padding: 0.45rem 0.85rem 0.55rem;
+  background-color: var(--field-bg);
+  border-bottom: 1px solid var(--field-border);
+  border-radius: 4px 4px 0 0;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.control:focus-within {
+  background-color: var(--field-bg-focus);
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: calc(0.55rem - 1px);
+}
+
+.control label {
+  font-size: 0.75rem;
+  line-height: 1.2;
+  color: var(--on-surface-variant);
+  cursor: text;
+}
+
+.control input,
+.control textarea,
+.control select {
+  width: 100%;
+  padding: 0.15rem 0 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--on-surface);
+}
+
+.control textarea {
+  min-height: 5.5rem;
+  line-height: 1.45;
+  resize: vertical;
+}
+
+.control select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 1.75rem;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5' fill='none' stroke='%2344474e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.25rem center;
+  background-size: 18px 18px;
+}
+
+/* Masquer les flèches natives du champ number (Material affiche son propre stepper) */
+.control input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.control input[type="number"]::-webkit-outer-spin-button,
+.control input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* --- Bouton d'upload (label associé à un input file) --- */
+.upload-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 0;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  background-color: #f7f2fa;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.upload-button:hover {
+  background-color: #ece6f0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Message d'erreur (zone dynamique Angular) --- */
+.error {
+  margin: -0.25rem 0 0.5rem;
+  font-size: 0.75rem;
+  color: var(--danger);
+}
+
+/* --- Barre d'actions --- */
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.action-buttons .left,
+.action-buttons .right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.action-buttons .right { justify-content: flex-end; }
+
+/* ============================================================
+    BOUTONS
+    ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.btn-filled {
+  background-color: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-filled:hover {
+  background-color: var(--primary-dark);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.btn-filled:active { transform: translateY(1px); }
+
+.btn-text {
+  background-color: transparent;
+  color: var(--primary);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.btn-text:hover { background-color: rgba(0, 92, 187, 0.08); }
+
+.btn-danger {
+  background-color: var(--danger);
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-danger:hover {
+  background-color: var(--danger-dark);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.btn-danger:active { transform: translateY(1px); }
+
+@media (max-width: 640px) {
+  .item-form { width: 100%; }
+  .action-buttons { flex-wrap: wrap; }
+  .action-buttons .left,
+  .action-buttons .right { flex: 1 1 auto; }
+}
