@@ -1,0 +1,29 @@
+<body>
+  <div id="page-container">
+
+    <!-- ==========================================================
+         COMPOSANT : MainMenu  (<app-main-menu>)
+         En Angular : affiché uniquement si l'utilisateur est connecté.
+         La collection affichée ici est "Collection mix" (3 objets).
+         ========================================================== -->
+    <app-main-menu-component></app-main-menu-component>
+
+
+    <main>
+
+      <!-- En-tête de la collection -->
+      <header id="collection-header">
+        <h1>Collection mix</h1>
+
+        <!-- ========================================================
+             COMPOSANT : SearchBar  (<app-search-bar>)
+             En Angular : [(search)]="search" (input/output liés)
+             ======================================================== -->
+        <app-search-bar-component></app-search-bar-component>
+      </header>
+
+      <router-outlet></router-outlet>
+
+    </main>
+  </div>
+</body>
