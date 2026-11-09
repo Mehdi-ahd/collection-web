@@ -1,1 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
+/* ============================================================
+       THÈME (proche du thème Azure d'Angular Material)
+       ============================================================ */
+    :root {
+      --primary: #005cbb;
+      --primary-dark: #004a99;
+      --on-surface: #1b1b1f;
+      --on-surface-variant: #44474e;
+      --field-bg: #e0e2ec;
+      --danger: #d32f2f;
+      --card-bg: #f0f6ff;
+      --card-border: #8ca3c7;
+      --chip: #4a6cf7;
+      --price: #1e8a3a;
+      --name: #1e2a3a;
+      --description: #334155;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Roboto, "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+      color: var(--on-surface);
+      background: linear-gradient(
+        135deg,
+        #f5e6ff 0%,
+        #e6f0ff 50%,
+        #f5e6ff 100%
+      );
+      background-attachment: fixed;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ============================================================
+       SHELL : sidebar + contenu (équivalent app.html / app.scss)
+       ============================================================ */
+    #page-container {
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    main {
+      flex-grow: 1;
+      min-width: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 1.5rem 1rem 2rem;
+    }
