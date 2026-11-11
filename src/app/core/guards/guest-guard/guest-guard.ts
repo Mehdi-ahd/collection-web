@@ -2,9 +2,13 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service';
 
-export const guestGuard: CanActivateFn = (route, state) => {
+/**
+ * Guard inverse de authGuard : empêche un utilisateur déjà connecté
+ * (token présent) d'accéder aux pages login / register.
+ */
+export const guestGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  return (authService.currentUser() && authService.token()) ? router.createUrlTree(['collection']) : true;
+  return authService.token() ? router.createUrlTree(['/collection']) : true;
 };
