@@ -1,70 +1,89 @@
-<!-- ======================================================
-        FORMULAIRE D'ÉDITION
-        En Angular :
-          <form [formGroup]="itemFormGroup" (submit)="submit($event)">
-        ====================================================== -->
-<form class="item-form" action="collection-detail.html" method="get">
+<form class="item-form" [formGroup]="itemFormGroup" (submit)="submit()">
+
+  <!-- Sélecteur de collection : uniquement en mode création -->
+  @if (!item()) {
+    <div class="form-field">
+      <div class="control">
+        <label for="collection">Collection : *</label>
+        <select id="collection" formControlName="collection" required>
+          @for (collection of collections(); track collection.id) {
+            <option [value]="collection.id">{{ collection.title }}</option>
+          }
+        </select>
+      </div>
+      @if (isFieldValid('collection')) {
+        <div class="error">Cette collection est obligatoire.</div>
+      }
+    </div>
+  }
 
   <!-- Champ : Name -->
   <div class="form-field">
     <div class="control">
-      <label for="name">Name : *</label>
-      <input id="name" name="name" type="text" value="Linx" required>
+      <label for="name">Nom : *</label>
+      <input id="name" formControlName="name" type="text" placeholder="Ex. : Pièce de 1972" required>
     </div>
-    <!-- Zone dynamique Angular : @if (isFieldValid('name')) { <mat-error>This field is required!</mat-error> } -->
+    @if (isFieldValid('name')) {
+      <div class="error">Le nom est obligatoire.</div>
+    }
   </div>
 
   <!-- Champ : Description -->
   <div class="form-field">
     <div class="control">
       <label for="description">Description : *</label>
-      <textarea id="description" name="description" rows="5" required>A legendary sword of unmatched sharpness and history.</textarea>
+      <textarea id="description" formControlName="description" rows="5" placeholder="Décrivez votre objet…" required></textarea>
     </div>
-    <!-- Zone dynamique Angular : @if (isFieldValid('description')) { <mat-error>This field is required!</mat-error> } -->
+    @if (isFieldValid('description')) {
+      <div class="error">La description est obligatoire.</div>
+    }
   </div>
 
   <!-- Champ : Rarity -->
   <div class="form-field">
     <div class="control">
-      <label for="rarity">Rarity*</label>
-      <select id="rarity" name="rarity" required>
-        <option value="Legendary" selected>Legendary</option>
-        <option value="Rare">Rare</option>
-        <option value="Uncommon">Uncommon</option>
-        <option value="Common">Common</option>
+      <label for="rarity">Rareté : *</label>
+      <select id="rarity" formControlName="rarity" required>
+        @for (rarity of rarities; track rarity) {
+          <option [value]="rarity">{{ rarity }}</option>
+        }
       </select>
     </div>
-    <!-- Zone dynamique Angular : @if (isFieldValid('rarity')) { <mat-error>This field is required!</mat-error> } -->
   </div>
 
   <!-- Champ : Price -->
   <div class="form-field">
     <div class="control">
-      <label for="price">Price : *</label>
-      <input id="price" name="price" type="number" min="0" value="250" required>
+      <label for="price">Prix : *</label>
+      <input id="price" formControlName="price" type="number" min="0" required>
     </div>
-    <!-- Zone dynamique Angular : @if (isFieldValid('price')) { <mat-error>...</mat-error> } -->
+    @if (isFieldValid('price')) {
+      @if (itemFormGroup.get('price')?.hasError('min')) {
+        <div class="error">Le prix doit être supérieur ou égal à 0.</div>
+      } @else {
+        <div class="error">Le prix est obligatoire.</div>
+      }
+    }
   </div>
 
-  <!-- Champ : Image (upload) -->
-  <input id="image" name="image" type="file" accept="image/*" hidden>
-  <label class="upload-button" for="image">Upload Image: ...</label>
-  <!-- Zone dynamique Angular : @if (isFieldValid('image')) { <div class="error">This field is required.</div> } -->
+  <!-- Champ : Image (upload → base64) -->
+  <input id="image" formControlName="image" type="file" accept="image/*" hidden (change)="onFileChange($event)">
+  <label class="upload-button" for="image">Upload Image: {{ fileName() || '...' }}</label>
+
+  @if (errorMessage()) {
+    <p class="error">{{ errorMessage() }}</p>
+  }
 
   <!-- Barre d'actions -->
   <div class="action-buttons">
     <div class="left">
-      <!--
-        En Angular, ce bouton n'est affiché qu'en mode édition :
-        @if (itemId()) { <button ...>Delete</button> }
-      -->
-      <a class="btn btn-danger" href="collection-detail.html">Delete</a>
+      @if (item()) {
+        <button class="btn btn-danger" type="button" (click)="delete()">Delete</button>
+      }
     </div>
     <div class="right">
-      <!-- En Angular : (click)="navigateBack()" -->
-      <a class="btn btn-text" href="collection-detail.html">Cancel</a>
-      <!-- En Angular : [disabled]="itemFormGroup.invalid" -->
-      <button class="btn btn-filled" type="submit">Save</button>
+      <button class="btn btn-text" type="button" (click)="cancel()">Cancel</button>
+      <button class="btn btn-filled" [disabled]="itemFormGroup.invalid" type="submit">Save</button>
     </div>
   </div>
 

@@ -1,0 +1,22 @@
+<div class="item-detail">
+
+  @if (errorMessage()) {
+    <p class="error-message">{{ errorMessage() }}</p>
+  } @else if (item(); as item) {
+    <!-- APERÇU : l'objet réel en cours d'édition -->
+    <div class="preview">
+      <app-collection-item-card-component [item]="item"></app-collection-item-card-component>
+    </div>
+
+    <!-- FORMULAIRE D'ÉDITION (composant partagé, prérempli) -->
+    <app-item-edit-form-component
+      [item]="item"
+      (saved)="save($event)"
+      (cancelled)="cancel()"
+      (deleted)="delete()">
+    </app-item-edit-form-component>
+  } @else {
+    <p>Chargement en cours…</p>
+  }
+
+</div>
