@@ -1,67 +1,48 @@
+@let collection = selected();
+
+<header id="collection-header">
+  <h1>{{ collection?.title ?? 'Collection' }}</h1>
+
+  <app-search-bar-component [(search)]="search"></app-search-bar-component>
+</header>
+
+@if (errorMessage()) {
+  <p class="centered error">{{ errorMessage() }}</p>
+}
+
 <section class="collection-grid" aria-label="Objets de la collection">
+  @if (displayedItems().length === 0) {
+    <p>Aucun objet à afficher{{ search() ? ' pour cette recherche' : '' }}.</p>
+  } @else {
+    @for (item of displayedItems(); track item.id) {
+      <div class="card-wrapper">
+        <a class="card-link" [routerLink]="['/item', item.id]" [attr.aria-label]="'Modifier ' + item.name">
+          <app-collection-item-card-component [item]="item"></app-collection-item-card-component>
+        </a>
 
-  <!-- ---------- Objet 1 : Pièce de 1972 (Common) ---------- -->
-  <div class="card-wrapper">
-    <a class="card-link" href="collection-item-edit.html" aria-label="Modifier Pièce de 1972">
-      <!-- COMPOSANT : CollectionItemCard (<app-collection-item-card>) -->
-      <article class="collection-item-card">
-        <span class="rarity-chip">Common</span>
-
-        <figure class="item-image">
-          <!-- Illustration inline : pièce de monnaie -->
-          <svg viewBox="0 0 120 120" role="img" aria-label="Pièce de 1972">
-            <defs>
-              <radialGradient id="coin-rim" cx="35%" cy="28%" r="80%">
-                <stop offset="0%" stop-color="#ffffff"/>
-                <stop offset="55%" stop-color="#d9dde2"/>
-                <stop offset="100%" stop-color="#a4abb4"/>
-              </radialGradient>
-              <radialGradient id="coin-core" cx="38%" cy="30%" r="75%">
-                <stop offset="0%" stop-color="#f8e9ad"/>
-                <stop offset="60%" stop-color="#dcbc61"/>
-                <stop offset="100%" stop-color="#ad8a32"/>
-              </radialGradient>
-              <path id="coin-arc" d="M 27,60 A 33,33 0 0 1 93,60" fill="none"/>
-            </defs>
-
-            <circle cx="60" cy="60" r="56" fill="url(#coin-rim)" stroke="#8d949d" stroke-width="1.5"/>
-            <circle cx="60" cy="60" r="51.5" fill="none" stroke="#ffffff" stroke-opacity="0.6" stroke-width="1"/>
-            <circle cx="60" cy="60" r="41" fill="url(#coin-core)" stroke="#9a7a2c" stroke-width="1"/>
-            <circle cx="60" cy="60" r="36" fill="none" stroke="#8a6c25" stroke-opacity="0.55" stroke-width="0.8" stroke-dasharray="1.5 2"/>
-
-            <text font-family="Georgia, serif" font-size="6.4" font-weight="bold" letter-spacing="1.1" fill="#6f5719">
-              <textPath href="#coin-arc" startOffset="50%" text-anchor="middle">RÉPUBLIQUE FRANÇAISE</textPath>
-            </text>
-
-            <text x="60" y="58" text-anchor="middle" font-family="Georgia, serif" font-size="15" font-weight="bold" fill="#6f5719">1972</text>
-            <text x="60" y="70" text-anchor="middle" font-family="Georgia, serif" font-size="5" letter-spacing="1.4" fill="#6f5719">FRANCS</text>
-
-            <ellipse cx="44" cy="34" rx="16" ry="8" fill="#ffffff" opacity="0.28" transform="rotate(-25 44 34)"/>
-          </svg>
-        </figure>
-
-        <header class="item-header">
-          <h2 class="item-name">Pièce de 1972</h2>
-        </header>
-
-        <p class="item-description">Pièce de 50 centimes de francs.</p>
-
-        <footer>
-          <p class="item-price">170 €</p>
-        </footer>
-      </article>
-    </a>
-    <!-- Pas de <hr> : les objets Common n'ont pas de liseré.
-          Ce spacer réserve la même hauteur pour garder les cartes alignées. -->
-    <div class="hr-spacer" aria-hidden="true"></div>
-  </div>
-
+        <!-- Liseré sous la carte selon la rareté (cf. cours) -->
+        @switch (item.rarity) {
+          @case ('Legendary') {
+            <hr class="gold">
+          }
+          @case ('Rare') {
+            <hr class="dashed">
+          }
+          @default {
+            <div class="hr-spacer" aria-hidden="true"></div>
+          }
+        }
+      </div>
+    }
+  }
 </section>
 
 <!-- Compteur d'objets affichés -->
-<div class="centered displayed-count">3 objet(s) affiché(s).</div>
+<div class="centered displayed-count">
+  {{ displayedItems().length }} objet{{ displayedItems().length > 1 ? 's' : '' }} affiché{{ displayedItems().length > 1 ? 's' : '' }}.
+</div>
 
 <!-- Bouton d'ajout -->
 <div class="centered">
-  <a class="btn btn-filled" href="collection-item-create.html">Ajouter Objet</a>
+  <a class="btn btn-filled" routerLink="/item/create">Ajouter Objet</a>
 </div>

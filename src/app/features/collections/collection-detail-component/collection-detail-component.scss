@@ -1,4 +1,28 @@
 /* ============================================================
+    EN-TÊTE DE LA COLLECTION (titre + recherche)
+    ============================================================ */
+#collection-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 0 1rem 1.75rem;
+}
+
+#collection-header h1 {
+  margin: 0;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--name);
+}
+
+@media (max-width: 520px) {
+  #collection-header { margin: 0 0 1.25rem; }
+}
+
+/* ============================================================
     GRILLE DE CARTES
     ============================================================ */
 .collection-grid {
@@ -136,6 +160,10 @@ hr.dashed {
 .centered {
   margin-top: 1rem;
   text-align: center;
+}
+
+.centered.error {
+  color: var(--danger);
 }
 
 .displayed-count {

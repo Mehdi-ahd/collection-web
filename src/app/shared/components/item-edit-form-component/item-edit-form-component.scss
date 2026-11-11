@@ -1,5 +1,5 @@
 /* ============================================================
-    FORMULAIRE D'ÉDITION
+    FORMULAIRE (commun create / edit)
     ============================================================ */
 .item-form {
   flex: 0 1 400px;
@@ -56,6 +56,12 @@
   color: var(--on-surface);
 }
 
+.control input::placeholder,
+.control textarea::placeholder {
+  color: #8b95a5;
+  opacity: 1;
+}
+
 .control textarea {
   min-height: 5.5rem;
   line-height: 1.45;
@@ -73,7 +79,7 @@
   background-size: 18px 18px;
 }
 
-/* Masquer les flèches natives du champ number (Material affiche son propre stepper) */
+/* Masquer les flèches natives du champ number */
 .control input[type="number"] {
   appearance: textfield;
   -moz-appearance: textfield;
@@ -109,7 +115,7 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* --- Message d'erreur (zone dynamique Angular) --- */
+/* --- Message d'erreur --- */
 .error {
   margin: -0.25rem 0 0.5rem;
   font-size: 0.75rem;
@@ -135,7 +141,7 @@
 .action-buttons .right { justify-content: flex-end; }
 
 /* ============================================================
-    BOUTONS
+    BOUTONS (forme "pill", variables du thème global)
     ============================================================ */
 .btn {
   display: inline-flex;
@@ -154,18 +160,36 @@
   transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
 }
 
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .btn-filled {
   background-color: var(--primary);
   color: #ffffff;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.btn-filled:hover {
+.btn-filled:hover:not(:disabled) {
   background-color: var(--primary-dark);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
-.btn-filled:active { transform: translateY(1px); }
+.btn-filled:active:not(:disabled) { transform: translateY(1px); }
+
+.btn-danger {
+  background-color: var(--danger);
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-danger:hover {
+  background-color: #b71c1c;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.btn-danger:active { transform: translateY(1px); }
 
 .btn-text {
   background-color: transparent;
@@ -175,23 +199,3 @@
 }
 
 .btn-text:hover { background-color: rgba(0, 92, 187, 0.08); }
-
-.btn-danger {
-  background-color: var(--danger);
-  color: #ffffff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.btn-danger:hover {
-  background-color: var(--danger-dark);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-}
-
-.btn-danger:active { transform: translateY(1px); }
-
-@media (max-width: 640px) {
-  .item-form { width: 100%; }
-  .action-buttons { flex-wrap: wrap; }
-  .action-buttons .left,
-  .action-buttons .right { flex: 1 1 auto; }
-}
