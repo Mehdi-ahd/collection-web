@@ -1,0 +1,224 @@
+/* ============================================================
+    THÈME (proche du thème Azure d'Angular Material)
+    ============================================================ */
+:root {
+  --primary: #005cbb;
+  --primary-dark: #004a99;
+  --on-surface: #1b1b1f;
+  --on-surface-variant: #44474e;
+  --field-bg: #e0e2ec;
+  --field-bg-focus: #e8eaf6;
+  --field-border: #74777f;
+  --danger: #d32f2f;
+  --card-bg: #ffffff;
+  --radius-field: 4px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Roboto, "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  color: var(--on-surface);
+  background: linear-gradient(
+    135deg,
+    #f5e6ff 0%,
+    #e6f0ff 50%,
+    #f5e6ff 100%
+  );
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+    CONTENEUR CENTRÉ
+    ============================================================ */
+#container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 1.5rem;
+}
+
+/* ============================================================
+    CARTE DE LOGIN
+    ============================================================ */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  max-width: 100%;
+  padding: 2rem 1.75rem 1.5rem;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(30, 42, 58, 0.14);
+}
+
+.brand {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.brand svg {
+  width: 56px;
+  height: 56px;
+  display: block;
+}
+
+.login-form h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1e2a3a;
+}
+
+.login-form .subtitle {
+  margin: 0.35rem 0 1.75rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #5f6368;
+}
+
+/* ============================================================
+    CHAMPS "FILLED" (équivalent mat-form-field appearance="fill")
+    ============================================================ */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 1rem;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  padding: 0.45rem 0.85rem 0.55rem;
+  background-color: var(--field-bg);
+  border-bottom: 1px solid var(--field-border);
+  border-radius: var(--radius-field) var(--radius-field) 0 0;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.control:focus-within {
+  background-color: var(--field-bg-focus);
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: calc(0.55rem - 1px);
+}
+
+.control label {
+  font-size: 0.75rem;
+  line-height: 1.2;
+  color: var(--on-surface-variant);
+  cursor: text;
+}
+
+.control input {
+  width: 100%;
+  padding: 0.15rem 0 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--on-surface);
+}
+
+.control input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 40px var(--field-bg) inset;
+  -webkit-text-fill-color: var(--on-surface);
+}
+
+/* ============================================================
+    BOUTONS (équivalent mat-flat-button, forme "pill")
+    ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.btn-filled {
+  background-color: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-filled:hover {
+  background-color: var(--primary-dark);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.btn-filled:active { transform: translateY(1px); }
+
+.login-button {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.8rem 1.5rem;
+}
+
+/* ============================================================
+    MESSAGE D'ERREUR + AIDE
+    ============================================================ */
+.error {
+  margin: 0.75rem 0 0;
+  font-size: 0.8rem;
+  text-align: center;
+  color: var(--danger);
+}
+
+.demo-hint {
+  margin: 1.25rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  text-align: center;
+  color: #80868f;
+}
+
+.demo-hint strong {
+  color: #5f6368;
+  font-weight: 600;
+}
+
+/* ============================================================
+    LIEN VERS L'INSCRIPTION
+    ============================================================ */
+.switch-auth {
+  margin: 1.1rem 0 0;
+  font-size: 0.85rem;
+  text-align: center;
+  color: #5f6368;
+}
+
+.switch-auth a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.switch-auth a:hover { text-decoration: underline; }
+
+/* ============================================================
+    RESPONSIVE
+    ============================================================ */
+@media (max-width: 440px) {
+  .login-form { padding: 1.5rem 1.25rem 1.25rem; }
+}
