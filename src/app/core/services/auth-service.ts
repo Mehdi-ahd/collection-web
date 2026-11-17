@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service, signal } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable, of, tap, catchError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { User } from '../../shared/interfaces/User';
 import { ApiResponse, AuthData, RegisterData } from '../../shared/interfaces/ApiResponse';
@@ -46,15 +46,23 @@ export class AuthService {
   }
 
   clearSession() {
-    this.setSession({ token: '', user: null as any });
+    this.token.set(null);
+    this.currentUser.set(null);
     localStorage.removeItem(TOKEN_KEY);
   }
 
-  logout(): Observable<any> {
+  logout(): Observable<unknown> {
+    if (!this.token()) {
+      this.clearSession();
+      return of(undefined);
+    }
+
     return this.http.post(`${this.apiUrl}/logout`, {}).pipe(
-      tap( () => {
+      tap(() => this.clearSession()),
+      catchError(() => {
         this.clearSession();
-      })
+        return of(undefined);
+      }),
     );
   }
 }

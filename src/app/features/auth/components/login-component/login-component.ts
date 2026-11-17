@@ -1,9 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth-service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { User } from '../../../../shared/interfaces/User';
 
 @Component({
   imports: [RouterLink, ReactiveFormsModule],
@@ -11,15 +9,16 @@ import { User } from '../../../../shared/interfaces/User';
   styleUrl: './login-component.scss',
   templateUrl: './login-component.html',
 })
-
 export class LoginComponent {
 
   router = inject(Router);
 
   authService = inject(AuthService);
 
+  errorMessage = signal('');
+
   loginFormGroup = new FormGroup({
-    email: new FormControl('',{
+    email: new FormControl('', {
       nonNullable: true,
       validators: [
         Validators.required,
@@ -36,15 +35,23 @@ export class LoginComponent {
   });
 
   login() {
+    if (this.loginFormGroup.invalid) {
+      this.loginFormGroup.markAllAsTouched();
+      return;
+    }
+
+    this.errorMessage.set('');
+
     const credentials = this.loginFormGroup.getRawValue();
 
+    // setSession() (token + user) est déjà géré par le service via tap().
     this.authService.login(credentials).subscribe({
       next: (response) => {
-        console.log(response);
-        this.router.navigate(['collection'])
+        this.router.navigate(['/collection']);
       },
       error: (error) => {
-        console.log("Erreur lors de la connexion", error)
+        console.error('Erreur lors de la connexion', error);
+        this.errorMessage.set(error.error?.message ?? 'Connexion impossible pour le moment');
       }
     })
   }
