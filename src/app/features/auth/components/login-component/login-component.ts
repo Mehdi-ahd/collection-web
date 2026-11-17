@@ -42,7 +42,6 @@ export class LoginComponent {
       next: (response) => {
         console.log(response);
         this.router.navigate(['collection'])
-        //this.authService.setUser(response.data.user);
       },
       error: (error) => {
         console.log("Erreur lors de la connexion", error)
