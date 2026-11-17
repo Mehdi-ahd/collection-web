@@ -1,0 +1,106 @@
+<div class="item-detail">
+
+  <!-- ======================================================
+        APERÇU : CollectionItemCard (<app-collection-item-card>)
+        État d'un nouvel objet : rarity = Common, price = 0,
+        name et description vides, image non renseignée.
+        ====================================================== -->
+  <div class="preview">
+    <article class="collection-item-card">
+      <span class="rarity-chip">Common</span>
+
+      <figure class="item-image">
+        <!-- Illustration inline : placeholder d'image -->
+        <svg viewBox="0 0 120 120" role="img" aria-label="Aucune image">
+          <rect x="6" y="6" width="108" height="108" rx="12" fill="#eef2f9" stroke="#b9c4d6" stroke-width="2" stroke-dasharray="6 6"/>
+          <circle cx="45" cy="45" r="9" fill="none" stroke="#8ca3c7" stroke-width="3"/>
+          <path d="M22 92 l24 -28 l16 18 l12 -12 l24 22 z" fill="#c3d0e2"/>
+          <path d="M22 92 h76" stroke="#8ca3c7" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </figure>
+
+      <header class="item-header">
+        <h2 class="item-name is-placeholder">Nom de l'objet</h2>
+      </header>
+
+      <p class="item-description is-placeholder">Description de l'objet…</p>
+
+      <footer>
+        <p class="item-price">0 €</p>
+      </footer>
+    </article>
+  </div>
+
+  <!-- ======================================================
+        FORMULAIRE DE CRÉATION
+        En Angular :
+          <form [formGroup]="itemFormGroup" (submit)="submit($event)">
+        ====================================================== -->
+  <form class="item-form" action="collection-detail.html" method="get">
+
+    <!-- Champ : Name -->
+    <div class="form-field">
+      <div class="control">
+        <label for="name">Name : *</label>
+        <input id="name" name="name" type="text" value="" placeholder="Ex. : Pièce de 1972" required>
+      </div>
+      <!-- Zone dynamique Angular : @if (isFieldValid('name')) { <mat-error>This field is required!</mat-error> } -->
+    </div>
+
+    <!-- Champ : Description -->
+    <div class="form-field">
+      <div class="control">
+        <label for="description">Description : *</label>
+        <textarea id="description" name="description" rows="5" placeholder="Décrivez votre objet…" required></textarea>
+      </div>
+      <!-- Zone dynamique Angular : @if (isFieldValid('description')) { <mat-error>This field is required!</mat-error> } -->
+    </div>
+
+    <!-- Champ : Rarity -->
+    <div class="form-field">
+      <div class="control">
+        <label for="rarity">Rarity*</label>
+        <select id="rarity" name="rarity" required>
+          <option value="Legendary">Legendary</option>
+          <option value="Rare">Rare</option>
+          <option value="Uncommon">Uncommon</option>
+          <option value="Common" selected>Common</option>
+        </select>
+      </div>
+      <!-- Zone dynamique Angular : @if (isFieldValid('rarity')) { <mat-error>This field is required!</mat-error> } -->
+    </div>
+
+    <!-- Champ : Price -->
+    <div class="form-field">
+      <div class="control">
+        <label for="price">Price : *</label>
+        <input id="price" name="price" type="number" min="0" value="0" required>
+      </div>
+      <!-- Zone dynamique Angular : @if (isFieldValid('price')) { <mat-error>...</mat-error> } -->
+    </div>
+
+    <!-- Champ : Image (upload) -->
+    <input id="image" name="image" type="file" accept="image/*" hidden>
+    <label class="upload-button" for="image">Upload Image: ...</label>
+    <!-- Zone dynamique Angular : @if (isFieldValid('image')) { <div class="error">This field is required.</div> } -->
+
+    <!-- Barre d'actions -->
+    <div class="action-buttons">
+      <div class="left">
+        <!--
+          Aucun bouton Delete en mode création : itemId() est undefined.
+          Le conteneur .left reste présent pour conserver l'alignement
+          de Cancel et Save à droite.
+        -->
+      </div>
+      <div class="right">
+        <!-- En Angular : (click)="navigateBack()" -->
+        <a class="btn btn-text" href="collection-detail.html">Cancel</a>
+        <!-- En Angular : [disabled]="itemFormGroup.invalid" -->
+        <button class="btn btn-filled" type="submit">Save</button>
+      </div>
+    </div>
+
+  </form>
+
+</div>
