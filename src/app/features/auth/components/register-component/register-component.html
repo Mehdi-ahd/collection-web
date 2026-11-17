@@ -1,0 +1,125 @@
+<div id="container">
+
+  <form class="register-form" [formGroup]="registerFormGroup" (ngSubmit)="register()" autocomplete="on">
+
+    <div class="brand" aria-hidden="true">
+      <!-- Illustration inline : petites cartes empilées (logo) -->
+      <svg viewBox="0 0 48 48" role="img" aria-label="Collection Manager">
+        <rect x="4" y="4" width="40" height="40" rx="10" fill="#e3ecfb"/>
+        <rect x="12" y="12" width="24" height="7" rx="3" fill="#005cbb"/>
+        <rect x="12" y="22" width="24" height="7" rx="3" fill="#7ba1e0"/>
+        <rect x="12" y="32" width="15" height="5" rx="2.5" fill="#9db9e6"/>
+      </svg>
+    </div>
+
+    <h1>Inscription</h1>
+    <p class="subtitle">Créez votre compte pour gérer votre collection</p>
+
+    <!-- Prénom + nom -->
+    <div class="name-row">
+      <div class="form-field">
+        <div class="control">
+          <label for="firstname">Prénoms</label>
+          <input
+            id="firstname"
+            formControlName="firstname"
+            type="text"
+            autocomplete="given-name"
+            required
+          >
+        </div>
+        @if (registerFormGroup.get('firstname')?.touched && registerFormGroup.get('firstname')?.hasError('required')) {
+          <div class="error">Le prénom est obligatoire.</div>
+        }
+      </div>
+
+      <div class="form-field">
+        <div class="control">
+          <label for="lastname">Nom</label>
+          <input
+            id="lastname"
+            formControlName="lastname"
+            type="text"
+            autocomplete="family-name"
+            required
+          >
+        </div>
+        @if (registerFormGroup.get('lastname')?.touched && registerFormGroup.get('lastname')?.hasError('required')) {
+          <div class="error">Le nom est obligatoire.</div>
+        }
+      </div>
+    </div>
+
+    <!-- email -->
+    <div class="form-field">
+      <div class="control">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          formControlName="email"
+          type="email"
+          autocomplete="email"
+          required
+        >
+      </div>
+      @if (registerFormGroup.get('email')?.touched) {
+        @if (registerFormGroup.get('email')?.hasError('required')) {
+          <div class="error">L'email est obligatoire.</div>
+        } @else if (registerFormGroup.get('email')?.hasError('email')) {
+          <div class="error">Format d'email invalide.</div>
+        }
+      }
+    </div>
+
+    <!-- Mot de passe -->
+    <div class="form-field">
+      <div class="control">
+        <label for="password">Mot de passe</label>
+        <input
+          id="password"
+          formControlName="password"
+          type="password"
+          autocomplete="new-password"
+          minlength="8"
+          required
+        >
+      </div>
+      @if (registerFormGroup.get('password')?.touched) {
+        @if (registerFormGroup.get('password')?.hasError('required')) {
+          <div class="error">Le mot de passe est obligatoire.</div>
+        } @else if (registerFormGroup.get('password')?.hasError('minlength')) {
+          <div class="error">Minimum 8 caractères.</div>
+        }
+      }
+    </div>
+
+    <!-- Confirmation du mot de passe -->
+    <div class="form-field">
+      <div class="control">
+        <label for="password_confirmation">Confirmer mot de passe</label>
+        <input
+          id="password_confirmation"
+          formControlName="password_confirmation"
+          type="password"
+          autocomplete="new-password"
+          minlength="8"
+          required
+        >
+      </div>
+      @if (registerFormGroup.get('password_confirmation')?.touched && registerFormGroup.hasError('passwordsMismatch')) {
+        <div class="error">Les mots de passe ne correspondent pas.</div>
+      }
+    </div>
+
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
+
+    <button class="btn btn-filled register-button" [disabled]="registerFormGroup.invalid" type="submit">S'inscrire</button>
+
+    <p class="switch-auth">
+      Déjà un compte ? <a routerLink="login">Se connecter</a>
+    </p>
+  </form>
+
+</div>
