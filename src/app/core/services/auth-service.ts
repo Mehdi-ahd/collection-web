@@ -35,6 +35,17 @@ export class AuthService {
     return this.http.post<ApiResponse<{ user: User }>>(`${this.apiUrl}/register`, user);
   }
 
+  /**
+   * Recharger l'utilisateur depuis le backend à partir du token :
+   * utilisé au rechargement de la page (F5), quand le token est
+   * restauré de localStorage mais que currentUser est null.
+   */
+  loadUser(): Observable<ApiResponse<{ user: User }>> {
+    return this.http.get<ApiResponse<{ user: User }>>(`${this.apiUrl}/user`).pipe(
+      tap((response) => this.setUser(response.data.user))
+    );
+  }
+
   setUser(user: User) {
     this.currentUser.set(user);
   }
