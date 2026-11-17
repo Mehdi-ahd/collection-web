@@ -1,49 +1,37 @@
-import { CollectionService } from './../../../features/collections/services/collection-service';
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth-service';
-import { User } from '../../interfaces/User';
-import { Collection } from '../../interfaces/Collection';
+import { CollectionService } from '../../../features/collections/services/collection-service';
 
 @Component({
-  imports: [],
+  imports: [RouterLink],
   selector: 'app-main-menu-component',
   styleUrl: './main-menu-component.scss',
   templateUrl: './main-menu-component.html',
 })
-export class MainMenuComponent implements OnInit {
+export class MainMenuComponent {
+
   authService = inject(AuthService);
+
   collectionService = inject(CollectionService);
 
-  currentUser = this.authService.currentUser();
-  token = this.authService.token();
+  router = inject(Router);
 
-  collections = signal<Collection[]>([]);
+  // On expose les signaux (pas leur valeur figée) : le menu reste réactif.
+  currentUser = this.authService.currentUser;
 
-  isLoading = false;
+  collections = this.collectionService.collections;
 
-  ngOnInit(): void {
-    this.getCollections();
-  }
+  selectedCollection = this.collectionService.selectedCollection;
 
-  getCollections() {
-    this.isLoading = true;
-
-    this.collectionService.index().subscribe({
-      next: (response) => {
-        this.collections.set(response.data);
-        this.isLoading = false;
-        console.log(response);
-      },
-
-      error: (error) => {
-        console.log(error);
-        this.isLoading = false;
-      }
-    })
-  }
+  isLoading = this.collectionService.isLoading;
 
   logout() {
-    this.authService.logout();
+    // clearSession() est déjà géré par le service ; on ne redirige
+    // qu'une fois la déconnexion (et sa chute d'erreur) terminée.
+    this.authService.logout().subscribe(() => {
+      this.router.navigate(['/login']);
+    });
   }
 
 }

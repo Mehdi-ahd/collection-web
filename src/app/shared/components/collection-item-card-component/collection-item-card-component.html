@@ -1,0 +1,27 @@
+<article class="collection-item-card">
+  <span class="rarity-chip">{{ item().rarity }}</span>
+
+  <figure class="item-image">
+    @if (item().image) {
+      <img [src]="item().image" [alt]="item().name">
+    } @else {
+      <!-- Placeholder : objet sans image -->
+      <svg viewBox="0 0 120 120" role="img" aria-label="Aucune image">
+        <rect x="6" y="6" width="108" height="108" rx="12" fill="#eef2f9" stroke="#b9c4d6" stroke-width="2" stroke-dasharray="6 6"/>
+        <circle cx="45" cy="45" r="9" fill="none" stroke="#8ca3c7" stroke-width="3"/>
+        <path d="M22 92 l24 -28 l16 18 l12 -12 l24 22 z" fill="#c3d0e2"/>
+        <path d="M22 92 h76" stroke="#8ca3c7" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    }
+  </figure>
+
+  <header class="item-header">
+    <h2 class="item-name">{{ item().name }}</h2>
+  </header>
+
+  <p class="item-description">{{ item().description }}</p>
+
+  <footer>
+    <p class="item-price">{{ item().price }} €</p>
+  </footer>
+</article>

@@ -59,6 +59,13 @@
   background-color: #9999ff25;
 }
 
+.collection-link {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+
 .dot {
   display: inline-block;
   flex: 0 0 auto;

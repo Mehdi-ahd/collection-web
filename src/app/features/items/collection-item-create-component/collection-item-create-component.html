@@ -1,0 +1,15 @@
+<div class="item-detail">
+
+  <!-- APERÇU : état initial (Common, 0 €) -->
+  <div class="preview">
+    <app-collection-item-card-component [item]="previewItem()"></app-collection-item-card-component>
+  </div>
+
+  <!-- FORMULAIRE DE CRÉATION (composant partagé) -->
+  <app-item-edit-form-component
+    [collections]="collections()"
+    (saved)="save($event)"
+    (cancelled)="cancel()">
+  </app-item-edit-form-component>
+
+</div>

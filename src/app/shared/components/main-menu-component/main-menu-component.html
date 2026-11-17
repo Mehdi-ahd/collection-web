@@ -1,42 +1,33 @@
 <nav class="main-menu" aria-label="Menu principal">
 
   <header class="user">
-    <span class="avatar" aria-hidden="true">A</span>
-    @if(currentUser) {
-      <span class="user-name">{{ currentUser?.lastname }}</span>
-    }
-
+    <span class="avatar" aria-hidden="true">{{ currentUser()?.firstname?.charAt(0) ?? 'U' }}</span>
+    <span class="user-name">{{ currentUser()?.firstname }} {{ currentUser()?.lastname }}</span>
   </header>
 
-  @if(isLoading) {
-    <p>Chargement en cours...</p>
+  @if (isLoading()) {
+    <p>Chargement en cours…</p>
+  } @else if (collections().length === 0) {
+    <p>Aucune collection disponible</p>
   } @else {
-    @if (collections.length === 0) {
-      <p>Aucune collecion disponible</p>
-    } @else {
+    <ul class="collections">
       @for (collection of collections(); track collection.id) {
-        <ul class="collections">
-          <li class="selected">
+        <li [class.selected]="collection.id === selectedCollection()?.id">
+          <a [routerLink]="['/collection', collection.id]" class="collection-link">
             <span class="dot" aria-hidden="true"></span>
             <div class="collection">
               <div class="name">Collection {{ collection.title }}</div>
-              <div class="items-count">3 items</div>
+              <div class="items-count">{{ collection.items?.length ?? 0 }} item(s)</div>
             </div>
-          </li>
-        </ul>
+          </a>
+        </li>
       }
-    }
+    </ul>
   }
 
-
   <footer>
-    <!-- Le cours applique la classe globale "danger" à ce bouton. -->
-     @if(currentUser && token) {
-      <form (submit)="logout()">
-        <button type="submit" class="btn btn-danger">Se déconnecter</button>
-      </form>
-     }
-
-    <!-- <a class="btn btn-danger" (click)="logout()">Logout</a> -->
+    <form (submit)="logout()">
+      <button type="submit" class="btn btn-danger">Se déconnecter</button>
+    </form>
   </footer>
 </nav>
